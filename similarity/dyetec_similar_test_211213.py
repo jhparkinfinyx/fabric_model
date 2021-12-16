@@ -29,7 +29,7 @@ def run(anchor_image, img_rows):
     ])
 
     ##### model 경로 지정
-    model_info = torch.load('./model/similarity/model_resnet34_triplet_epoch_26.pt')
+    model_info = torch.load('./model/similarity/model_resnet34_triplet_epoch_26.pt', map_location=torch.device('cpu'))
     model_architecture = model_info['model_architecture']
     embedding_dimension = model_info['embedding_dimension']
 
