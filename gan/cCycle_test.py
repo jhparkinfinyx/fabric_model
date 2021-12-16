@@ -49,11 +49,11 @@ def run(fabric_property):
     FloatTensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 
     # B image
-    checkpoint = torch.load('./model/gan/399_generator.pth')
+    checkpoint = torch.load('./model/gan/399_generator.pth', map_location=torch.device('cpu'))
     generator.load_state_dict(checkpoint['model_state_dict'])
     generator.eval()
 
-    checkpoint = torch.load('./model/gan/G_BA_38.pth')
+    checkpoint = torch.load('./model/gan/G_BA_38.pth', map_location=torch.device('cpu'))
     G_BA.load_state_dict(checkpoint)
     G_BA.eval()
 
@@ -69,7 +69,7 @@ def run(fabric_property):
     b_img_str = cv2.imencode('.png', b_cycle_gen_img*255)[1].tostring()
 
     # F image
-    checkpoint = torch.load('./model/gan/F_260_generator.pth')
+    checkpoint = torch.load('./model/gan/F_260_generator.pth', map_location=torch.device('cpu'))
     generator.load_state_dict(checkpoint['model_state_dict'])
     generator.eval()
 
@@ -77,9 +77,9 @@ def run(fabric_property):
 
     su = np.sum(b_cycle_gen_img < 1)
     if su < 15900:
-        checkpoint = torch.load('./model/gan/F_G_BA_140.pth')
+        checkpoint = torch.load('./model/gan/F_G_BA_140.pth', map_location=torch.device('cpu'))
     else:
-        checkpoint = torch.load('./model/gan/F_G_BA_105.pth')
+        checkpoint = torch.load('./model/gan/F_G_BA_105.pth', map_location=torch.device('cpu'))
     G_BA.load_state_dict(checkpoint)
     G_BA.eval()
 
